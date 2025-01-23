@@ -568,21 +568,24 @@ require('lazy').setup({
         lemminx = {},
         csharp_ls = {},
         jsonls = {
-          setting = {
+          settings = {
             json = {
               format = { enable = true },
               schemas = {
                 {
+                  description = 'Node.js schema config for package.json file(s)',
                   fileMatch = { 'package.json' },
-                  url = 'https://json.schemastore.org/package.json',
+                  url = 'http://json.schemastore.org/package',
                 },
                 {
+                  description = 'JSON schema for tsconfig file(s)',
                   fileMatch = { 'tsconfig.json', 'tsconfig.*.json' },
-                  url = 'https://json.schemastore.org/tsconfig',
+                  url = 'http://json.schemastore.org/tsconfig',
                 },
                 {
+                  description = 'JSON schema for jsconfig file(s)',
                   fileMatch = { 'jsconfig.json', 'jsconfig.*.json' },
-                  url = 'https://json.schemastore.org/jsconfig',
+                  url = 'http://json.schemastore.org/jsconfig',
                 },
               },
             },
@@ -856,7 +859,27 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = {'bash', 'c', 'html', 'lua', 'luadoc', 'query', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'javascript', 'typescript', 'css', 'c', 'html', 'jsdoc', 'json', 'jsonc', 'python', },
+      ensure_installed = {
+        'bash',
+        'c',
+        'html',
+        'lua',
+        'luadoc',
+        'query',
+        'markdown',
+        'markdown_inline',
+        'vim',
+        'vimdoc',
+        'javascript',
+        'typescript',
+        'css',
+        'c',
+        'html',
+        'jsdoc',
+        'json',
+        'jsonc',
+        'python',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

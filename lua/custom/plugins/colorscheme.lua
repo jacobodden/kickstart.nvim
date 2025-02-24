@@ -46,7 +46,24 @@ return {
     priority = 1000,
     name = 'sonokai',
     init = function()
-      vim.cmd.colorscheme 'sonokai'
+      -- vim.cmd.colorscheme 'sonokai'
+    end,
+  },
+  {
+    'catppuccin/nvim',
+    priority = 1000,
+    name = 'catppuccin',
+    init = function()
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'mocha',
+        intergrations = {
+          nvimtree = true,
+          treesitter = true,
+        },
+      }
     end,
   },
 }

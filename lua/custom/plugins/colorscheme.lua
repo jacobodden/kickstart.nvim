@@ -54,7 +54,7 @@ return {
     priority = 1000,
     name = 'catppuccin',
     init = function()
-      vim.cmd.colorscheme 'catppuccin'
+      -- vim.cmd.colorscheme 'catppuccin'
     end,
     config = function()
       require('catppuccin').setup {
@@ -62,6 +62,22 @@ return {
         intergrations = {
           nvimtree = true,
           treesitter = true,
+        },
+      }
+    end,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'kanagawa'
+    end,
+    config = function()
+      require('kanagawa').setup {
+        theme = 'dragon',
+        background = {
+          dark = 'dragon',
+          light = 'lotus',
         },
       }
     end,

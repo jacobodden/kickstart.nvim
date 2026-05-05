@@ -130,6 +130,11 @@ do
 
   -- Enable undo/redo changes even after closing and reopening a file
   vim.o.undofile = true
+  vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
+  vim.o.writebackup = false
+
+  -- Enable undo/redo changes even after closing and reopening a file
+  vim.o.undofile = true
 
   if vim.fn.has('win32') == 1 then
     vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
@@ -213,6 +218,42 @@ do
 
   vim.cmd 'au BufRead,BufNewFile *.ashx set filetype=cs'
   vim.cmd 'au BufRead,BufNewFile *.wsb set filetype=xml'
+
+  -- [[ Personal Customizations ]]
+  vim.o.colorcolumn = '80'
+  vim.o.textwidth = 80
+  vim.o.wrap = false
+  vim.o.sidescrolloff = 10
+  vim.o.hlsearch = true
+  vim.o.formatoptions = 'cqnljp'
+  vim.o.shortmess = 'ltToOCFc'
+  vim.o.fileformat = 'dos'
+  vim.o.fileformats = 'dos'
+  vim.o.tabstop = 2
+  vim.o.shiftwidth = 2
+  vim.o.softtabstop = 2
+  vim.o.expandtab = true
+  vim.g.python3_host_prog = 'C:/Python311/python.exe'
+  vim.g.python3_host_skip_check = 1
+  vim.g.loaded_newrw = 1
+  vim.g.loaded_netrwPlugin = 1
+  vim.g.javascript_plugin_jsdoc = 1
+  vim.g.javascript_plugin_flow = 0
+
+  if vim.fn.executable 'rg' then
+    vim.g.rg_derive_root = 'true'
+    vim.g.rg_root_types = { '.git', 'jsconfig.json', '.MySCMServerInfo', 'tsconfig.json' }
+  end
+
+  vim.cmd 'au BufRead,BufNewFile *.ashx set filetype=cs'
+  vim.cmd 'au BufRead,BufNewFile *.wsb set filetype=xml'
+
+  -- [[ Basic Keymaps ]]
+  --  See `:help vim.keymap.set()`
+  vim.keymap.set('n', '<leader>li', '<cmd>Lazy install<CR>', { desc = '[L]azy [i]nstall' })
+  vim.keymap.set('n', '<leader>lu', '<cmd>Lazy update<CR>', { desc = '[L]azy [u]nstall' })
+  vim.keymap.set('n', '<leader>lc', '<cmd>Lazy clean<CR>', { desc = '[L]azy [c]lean' })
+  vim.keymap.set('n', '<leader>ls', '<cmd>Lazy show<CR>', { desc = '[L]azy [s]how' })
 
   -- [[ Basic Keymaps ]]
   --  See `:help vim.keymap.set()`
@@ -1006,18 +1047,20 @@ do
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug'
-  -- require 'kickstart.plugins.indent_line'
-  -- require 'kickstart.plugins.lint'
-  -- require 'kickstart.plugins.autopairs'
-  -- require 'kickstart.plugins.neo-tree'
-  -- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
+  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.indent_line',
+  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  -- require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   -- require 'custom.plugins'
 end
+
+vim.cmd.packadd 'cfilter'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

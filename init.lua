@@ -87,11 +87,12 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
+vim.o.guifont = 'Hack_Nerd_Font,Hack_Nerd_Font_Mono,Segoe_UI_Emoji:h12.5'
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -121,6 +122,8 @@ vim.o.breakindent = true
 
 -- Enable undo/redo changes even after closing and reopening a file
 vim.o.undofile = true
+vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
+vim.o.writebackup = false
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -148,13 +151,14 @@ vim.o.splitbelow = true
 --   See `:help lua-options`
 --   and `:help lua-guide-options`
 vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '¬', extends = '>', precedes = '<' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
 -- Show which line your cursor is on
 vim.o.cursorline = true
+vim.o.cursorcolumn = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
@@ -163,9 +167,41 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
+-- [[ Personal Customizations ]]
+vim.o.colorcolumn = '80'
+vim.o.textwidth = 80
+vim.o.wrap = false
+vim.o.sidescrolloff = 10
+vim.o.hlsearch = true
+vim.o.formatoptions = 'cqnljp'
+vim.o.shortmess = 'ltToOCFc'
+vim.o.fileformat = 'dos'
+vim.o.fileformats = 'dos'
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.g.python3_host_prog = 'C:/Python311/python.exe'
+vim.g.python3_host_skip_check = 1
+vim.g.loaded_newrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.javascript_plugin_jsdoc = 1
+vim.g.javascript_plugin_flow = 0
+
+if vim.fn.executable 'rg' then
+  vim.g.rg_derive_root = 'true'
+  vim.g.rg_root_types = { '.git', 'jsconfig.json', '.MySCMServerInfo', 'tsconfig.json' }
+end
+
+vim.cmd 'au BufRead,BufNewFile *.ashx set filetype=cs'
+vim.cmd 'au BufRead,BufNewFile *.wsb set filetype=xml'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+vim.keymap.set('n', '<leader>li', '<cmd>Lazy install<CR>', { desc = '[L]azy [i]nstall' })
+vim.keymap.set('n', '<leader>lu', '<cmd>Lazy update<CR>', { desc = '[L]azy [u]nstall' })
+vim.keymap.set('n', '<leader>lc', '<cmd>Lazy clean<CR>', { desc = '[L]azy [c]lean' })
+vim.keymap.set('n', '<leader>ls', '<cmd>Lazy show<CR>', { desc = '[L]azy [s]how' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -392,6 +428,7 @@ require('lazy').setup({
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
+          file_ignore_patterns = { 'node_modules', 'dist', 'src\\images', 'App_Code', 'Bin', '%__virtual.cs' },
         -- },
         -- pickers = {}
         extensions = {
@@ -407,7 +444,7 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -643,6 +680,34 @@ require('lazy').setup({
           settings = {
             Lua = {
               format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+            },
+          },
+        },
+	ts_ls = {},
+        pyright = {},
+        tailwindcss = {},
+        lemminx = {},
+        jsonls = {
+          settings = {
+            json = {
+              format = { enable = true },
+              schemas = {
+                {
+                  description = 'Node.js schema config for package.json file(s)',
+                  fileMatch = { 'package.json' },
+                  url = 'http://json.schemastore.org/package',
+                },
+                {
+                  description = 'JSON schema for tsconfig file(s)',
+                  fileMatch = { 'tsconfig.json', 'tsconfig.*.json' },
+                  url = 'http://json.schemastore.org/tsconfig',
+                },
+                {
+                  description = 'JSON schema for jsconfig file(s)',
+                  fileMatch = { 'jsconfig.json', 'jsconfig.*.json' },
+                  url = 'http://json.schemastore.org/jsconfig',
+                },
+              },
             },
           },
         },
@@ -889,7 +954,7 @@ require('lazy').setup({
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
       -- ensure basic parser are installed
-      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'javascript', 'typescript', 'css', 'jsdoc', 'json', 'jsonc', 'python'}
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer
@@ -947,10 +1012,10 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
@@ -985,6 +1050,8 @@ require('lazy').setup({
     },
   },
 })
+
+vim.cmd.packadd 'cfilter'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

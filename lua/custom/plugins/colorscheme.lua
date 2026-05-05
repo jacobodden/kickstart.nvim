@@ -54,7 +54,7 @@ return {
     priority = 1000,
     name = 'catppuccin',
     init = function()
-      -- vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin'
     end,
     config = function()
       require('catppuccin').setup {
@@ -91,7 +91,7 @@ return {
       }
     end,
     init = function()
-      vim.cmd.colorscheme 'onedark'
+      -- vim.cmd.colorscheme 'onedark'
     end,
   },
 }

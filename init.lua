@@ -125,13 +125,19 @@ do
   --  See `:help 'clipboard'`
   vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
-  -- Enable break indent
-  vim.o.breakindent = true
-
   -- Enable undo/redo changes even after closing and reopening a file
   vim.o.undofile = true
-  vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
+
+  if vim.fn.has('win32') == 1 then
+    vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
+  else
+    vim.o.undodir = '~/.config/nvim/undodir'
+  end
+
   vim.o.writebackup = false
+
+  -- Enable break indent
+  vim.o.breakindent = true
 
   -- Enable undo/redo changes even after closing and reopening a file
   vim.o.undofile = true
@@ -174,13 +180,6 @@ do
 
   -- Preview substitutions live, as you type!
   vim.o.inccommand = 'split'
-
-  -- Show which line your cursor is on
-  vim.o.cursorline = true
-  vim.o.cursorcolumn = true
-
-  -- Minimal number of screen lines to keep above and below the cursor.
-  vim.o.scrolloff = 10
 
   -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
   -- instead raise a dialog asking if you wish to save the current file(s)
@@ -233,12 +232,23 @@ do
   vim.o.shiftwidth = 2
   vim.o.softtabstop = 2
   vim.o.expandtab = true
-  vim.g.python3_host_prog = 'C:/Python311/python.exe'
+
+  if vim.fn.has('win32') == 1 then
+    vim.g.python3_host_prog = 'C:/Python311/python.exe'
+  end
+
   vim.g.python3_host_skip_check = 1
   vim.g.loaded_newrw = 1
   vim.g.loaded_netrwPlugin = 1
   vim.g.javascript_plugin_jsdoc = 1
   vim.g.javascript_plugin_flow = 0
+
+  -- Show which line your cursor is on
+  vim.o.cursorline = true
+  vim.o.cursorcolumn = true
+
+  -- Minimal number of screen lines to keep above and below the cursor.
+  vim.o.scrolloff = 10
 
   if vim.fn.executable 'rg' then
     vim.g.rg_derive_root = 'true'

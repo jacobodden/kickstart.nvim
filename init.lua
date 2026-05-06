@@ -122,7 +122,14 @@ vim.o.breakindent = true
 
 -- Enable undo/redo changes even after closing and reopening a file
 vim.o.undofile = true
-vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
+
+
+if vim.fn.has('win32') == 1 then
+  vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
+else
+  vim.o.undodir = '~/.config/nvim/undodir'
+end
+
 vim.o.writebackup = false
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
@@ -181,7 +188,11 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
-vim.g.python3_host_prog = 'C:/Python311/python.exe'
+
+if vim.fn.has('win32') == 1 then
+  vim.g.python3_host_prog = 'C:/Python311/python.exe'
+end
+
 vim.g.python3_host_skip_check = 1
 vim.g.loaded_newrw = 1
 vim.g.loaded_netrwPlugin = 1

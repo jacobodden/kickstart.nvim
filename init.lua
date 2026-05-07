@@ -829,6 +829,34 @@ do
         },
       },
     },
+    ts_ls = {},
+    pyright = {},
+    tailwindcss = {},
+    lemminx = {},
+    jsonls = {
+      settings = {
+        json = {
+          format = { enable = true },
+          schemas = {
+            {
+              description = 'Node.js schema config for package.json file(s)',
+              fileMatch = { 'package.json' },
+              url = 'http://json.schemastore.org/package',
+            },
+            {
+              description = 'JSON schema for tsconfig file(s)',
+              fileMatch = { 'tsconfig.json', 'tsconfig.*.json' },
+              url = 'http://json.schemastore.org/tsconfig',
+            },
+            {
+              description = 'JSON schema for jsconfig file(s)',
+              fileMatch = { 'jsconfig.json', 'jsconfig.*.json' },
+              url = 'http://json.schemastore.org/jsconfig',
+            },
+          },
+        },
+      },
+    },
   }
 
   vim.pack.add {
@@ -1057,17 +1085,18 @@ do
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
+  require 'kickstart.plugins.debug'
+  -- require 'kickstart.plugins.indent_line'
+  -- require 'kickstart.plugins.lint'
+  require 'kickstart.plugins.autopairs'
+  -- require 'kickstart.plugins.neo-tree'
+  -- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- require 'custom.plugins'
+  require 'custom.plugins'
+end
 
 vim.cmd.packadd 'cfilter'
 

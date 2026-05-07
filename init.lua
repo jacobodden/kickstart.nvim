@@ -185,6 +185,7 @@ do
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
   vim.o.confirm = true
+
   -- [[ Personal Customizations ]]
   vim.o.colorcolumn = '80'
   vim.o.textwidth = 80
@@ -218,59 +219,9 @@ do
   vim.cmd 'au BufRead,BufNewFile *.ashx set filetype=cs'
   vim.cmd 'au BufRead,BufNewFile *.wsb set filetype=xml'
 
-  -- [[ Personal Customizations ]]
-  vim.o.colorcolumn = '80'
-  vim.o.textwidth = 80
-  vim.o.wrap = false
-  vim.o.sidescrolloff = 10
-  vim.o.hlsearch = true
-  vim.o.formatoptions = 'cqnljp'
-  vim.o.shortmess = 'ltToOCFc'
-  vim.o.fileformat = 'dos'
-  vim.o.fileformats = 'dos'
-  vim.o.tabstop = 2
-  vim.o.shiftwidth = 2
-  vim.o.softtabstop = 2
-  vim.o.expandtab = true
-
-  if vim.fn.has('win32') == 1 then
-    vim.g.python3_host_prog = 'C:/Python311/python.exe'
-  end
-
-  vim.g.python3_host_skip_check = 1
-  vim.g.loaded_newrw = 1
-  vim.g.loaded_netrwPlugin = 1
-  vim.g.javascript_plugin_jsdoc = 1
-  vim.g.javascript_plugin_flow = 0
-
-  -- Show which line your cursor is on
-  vim.o.cursorline = true
-  vim.o.cursorcolumn = true
-
-  -- Minimal number of screen lines to keep above and below the cursor.
-  vim.o.scrolloff = 10
-
-  if vim.fn.executable 'rg' then
-    vim.g.rg_derive_root = 'true'
-    vim.g.rg_root_types = { '.git', 'jsconfig.json', '.MySCMServerInfo', 'tsconfig.json' }
-  end
-
-  vim.cmd 'au BufRead,BufNewFile *.ashx set filetype=cs'
-  vim.cmd 'au BufRead,BufNewFile *.wsb set filetype=xml'
-
   -- [[ Basic Keymaps ]]
   --  See `:help vim.keymap.set()`
-  vim.keymap.set('n', '<leader>li', '<cmd>Lazy install<CR>', { desc = '[L]azy [i]nstall' })
-  vim.keymap.set('n', '<leader>lu', '<cmd>Lazy update<CR>', { desc = '[L]azy [u]nstall' })
-  vim.keymap.set('n', '<leader>lc', '<cmd>Lazy clean<CR>', { desc = '[L]azy [c]lean' })
-  vim.keymap.set('n', '<leader>ls', '<cmd>Lazy show<CR>', { desc = '[L]azy [s]how' })
-
-  -- [[ Basic Keymaps ]]
-  --  See `:help vim.keymap.set()`
-  vim.keymap.set('n', '<leader>li', '<cmd>Lazy install<CR>', { desc = '[L]azy [i]nstall' })
-  vim.keymap.set('n', '<leader>lu', '<cmd>Lazy update<CR>', { desc = '[L]azy [u]nstall' })
-  vim.keymap.set('n', '<leader>lc', '<cmd>Lazy clean<CR>', { desc = '[L]azy [c]lean' })
-  vim.keymap.set('n', '<leader>ls', '<cmd>Lazy show<CR>', { desc = '[L]azy [s]how' })
+  vim.keymap.set('n', '<leader>pu', vim.pack.update, { desc = '[P]ack [u]date' })
 
   -- Clear highlights on search when pressing <Esc> in normal mode
   --  See `:help hlsearch`

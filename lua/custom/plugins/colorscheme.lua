@@ -11,7 +11,6 @@ vim.pack.add({
   gh 'sainnhe/sonokai',
   gh 'catppuccin/nvim',
   gh 'rebelot/kanagawa.nvim',
-  gh 'rebelot/kanagawa.nvim',
   gh 'navarasu/onedark.nvim',
 })
 

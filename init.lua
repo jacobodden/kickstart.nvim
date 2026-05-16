@@ -131,24 +131,13 @@ do
   if vim.fn.has('win32') == 1 then
     vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
   else
-    vim.o.undodir = '~/.config/nvim/undodir'
+    vim.o.undodir = vim.fn.stdpath("config") .. "/undodir"
   end
 
   vim.o.writebackup = false
 
   -- Enable break indent
   vim.o.breakindent = true
-
-  -- Enable undo/redo changes even after closing and reopening a file
-  vim.o.undofile = true
-
-  if vim.fn.has('win32') == 1 then
-    vim.o.undodir = 'C:/Users/jodden/AppData/local/nvim/undodir'
-  else
-    vim.o.undodir = '~/.config/nvim/undodir'
-  end
-
-  vim.o.writebackup = false
 
   -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
   vim.o.ignorecase = true
